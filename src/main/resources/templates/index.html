@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Monitoring Board</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-inner">
+            <div class="header-title">
+                <h1>Job Monitor</h1>
+                <p>Tracks open roles across selected companies</p>
+            </div>
+        </div>
+
+        <div class="header-inner">
+            <div class="header-desc">
+                <p>Currently syncing every hour</p>
+            </div>
+        </div>
+
+        <div class="header-inner">
+            <div class="header-info">
+                <p><strong th:text="${jobs.size()}"></strong> total postings</p>
+            </div>
+        </div>
+
+        <form th:action="@{/admin/clear}" method="post">
+            <button type="submit" class="clear-all-jobs-button">Clear All Jobs</button>
+        </form>
+    </header>
+
+    <div class="table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>Company</th>
+                <th>Role</th>
+                <th>Location</th>
+                <th>First Seen</th>
+                <th>Link</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="job : ${jobs}">
+                <td>
+                    <div class="company-cell">
+                        <span class="company-name" th:text="${job.company}"></span>
+                    </div>
+                </td>
+                <td class="title-cell" th:text="${job.title}"></td>
+                <td class="location-cell" th:text="${job.location}"></td>
+                <td class="date-cell" th:text="${#temporals.format(job.firstSeen, 'MMM d, yyyy')}"></td>
+                <td><a class="apply-link" th:href="${job.url}" target="_blank">Apply</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
