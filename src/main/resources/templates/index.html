@@ -27,6 +27,12 @@
             </div>
         </div>
 
+        <div class="filters">
+            <a th:href="@{/}" class="filter-btn">All</a>
+            <a th:href="@{/(company='stripe')}" class="filter-btn">Stripe</a>
+            <a th:href="@{/(company='airbnb')}" class="filter-btn">Airbnb</a>
+        </div>
+
         <form th:action="@{/admin/clear}" method="post">
             <button type="submit" class="clear-all-jobs-button">Clear All Jobs</button>
         </form>
